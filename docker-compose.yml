@@ -1,0 +1,18 @@
+version: "3.1"
+services:
+  api:
+    build: ./Natt
+    container_name: Natt
+    restart: always
+    ports:
+      - 8081:8000
+    networks:
+      - backend
+    environment:
+      - DISCORD_CHANNEL="YOUR CHANNEL NAME"
+      - DISCORD_TOKEN="YOUR DISCORD TOKEN"
+
+networks:
+  backend:
+    driver: bridge
+
