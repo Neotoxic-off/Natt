@@ -43,6 +43,9 @@ class DiscordClient:
                         {"name": "Size", "value": item["size"], "inline": False}
                     ]
                 })
+        if (len(embeds) > 0):
+            messages.append(embeds.copy())
+            embeds.clear()
 
         for i in range(0, len(messages)):
             payload = {
