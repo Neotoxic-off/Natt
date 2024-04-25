@@ -9,8 +9,7 @@ services:
     networks:
       - backend
     environment:
-      - DISCORD_CHANNEL="YOUR CHANNEL NAME"
-      - DISCORD_TOKEN="YOUR DISCORD TOKEN"
+      - DISCORD_WEBHOOK=text
 
 networks:
   backend:

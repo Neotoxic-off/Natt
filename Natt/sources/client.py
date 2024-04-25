@@ -1,15 +1,43 @@
-import discord
+import os
+import json
+import requests
 
-class DiscordClient(discord.Client):
-    async def on_ready(self):
-        print(f"Logged on as {self.user}")
+from scrapper import Scrapper
 
-    async def on_message(self, message):
-        if (message.author == self.user):
-            return
+class DiscordClient:
+    def __init__(self, whitelist):
+        self.scrapper = Scrapper()
+        self.whitelist: list = whitelist
 
-    async def send_anime(self, channel_name: str, animes: list):
-        for anime in animes:
-            embed = discord.Embed(title=anime["title"], url=anime["link"])
-            channel = discord.utils.get(self.get_all_channels(), name=channel_name)
-            await channel.send(embed)
+    def run(self):
+        self.scrapper.get()
+
+        headers = {
+            "Content-Type": "application/json"
+        }
+        
+        for item in self.scrapper.anime:
+            payload = {
+                "embeds": [
+                    {
+                        "title": item["title"],
+                        "url": item["link"],
+                        "color": 0xce00ff,
+                        "thumbnail": {"url": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Nyaa_Logo.png"},
+                        "fields": [
+                            {"name": "Publication Date", "value": item["pub_date"], "inline": False},
+                            {"name": "Category", "value": item["category"], "inline": False},
+                            {"name": "Seeders", "value": item["seeders"], "inline": True},
+                            {"name": "Leechers", "value": item["leechers"], "inline": True},
+                            {"name": "Downloads", "value": item["downloads"], "inline": True},
+                            {"name": "Size", "value": item["size"], "inline": False}
+                        ]
+                    }
+                ]
+            }
+        response = requests.post(os.environ.get("DISCORD_WEBHOOKS"), data=json.dumps(payload), headers=headers)
+
+        if response.status_code == 200:
+            print("Webhook sent successfully!")
+        else:
+            print(f"Failed to send webhook. Status code: {response.status_code}")
