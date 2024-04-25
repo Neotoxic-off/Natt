@@ -9,7 +9,7 @@ services:
     networks:
       - backend
     environment:
-      - DISCORD_WEBHOOK=text
+      - DISCORD_WEBHOOKS=https://discord.com/api/webhooks/<YOUR WEBHOOK>
 
 networks:
   backend:
