@@ -1,7 +1,12 @@
 # Natt
 🔍 New Anime Torrent Tracker
 
-## Edit the whitelist
+## C#
+- Download the release
+
+## Python
+
+### Edit the whitelist
 - sources/core.py
 ```
 self.whitelist = [
@@ -22,7 +27,7 @@ self.whitelist = [
 ]
 ```
 
-## Usage
+### Usage
 ```BASH
 docker compose up --build
 ```
