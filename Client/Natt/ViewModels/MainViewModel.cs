@@ -13,6 +13,7 @@ using Natt.Models;
 using System.Xml.Linq;
 using System.Globalization;
 using System.Windows.Data;
+using System.IO;
 
 namespace Natt.ViewModels
 {
@@ -42,15 +43,30 @@ namespace Natt.ViewModels
         public MainViewModel()
         {
             Items = new ObservableCollection<AnimeModel>();
-            Whitelist = new ObservableCollection<string>()
-            {
-                "The Misfit of Demon King Academy",
-                "Solo Leveling",
-                "Overlord"
-            };
+            Whitelist = new ObservableCollection<string>();
             WhitelistCount = 0;
 
+            InitWhitelist();
+
             LoadRSSFeed();
+        }
+
+        private void InitWhitelist()
+        {
+            string path = "whitelist.txt";
+            string[] buffer = null;
+
+            if (File.Exists(path) == false)
+            {
+                File.Create(path).Close();
+            } else
+            {
+                buffer = File.ReadAllLines(path);
+                foreach (string line in buffer)
+                {
+                    Whitelist.Add(line);
+                }
+            }
         }
 
         private AnimeModel FindAnime(string name)

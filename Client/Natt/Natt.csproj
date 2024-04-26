@@ -6,7 +6,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Untitled-1.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Untitled-1.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.ServiceModel.Syndication" Version="8.0.0" />
