@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "rA3U59fqISMxE3r+tsoWQnUJlIu8RGIaSoplU5LTBB8SHw++kF9Ut5T6pZqKsY1qr5eWeXXwTZueZBw0PO4ILw==",
+  "success": true,
+  "projectFilePath": "D:\\Natt\\Client\\Natt\\Natt.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\paulg\\.nuget\\packages\\system.servicemodel.syndication\\8.0.0\\system.servicemodel.syndication.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
