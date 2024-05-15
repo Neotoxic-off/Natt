@@ -21,6 +21,7 @@ class Downloader:
         downloader: TorrentDownloader = None
         path: str = None
 
+        print(f"{len(self.queue)} torrents in queue")
         for torrent in self.queue:
             path = os.path.basename(urlparse(torrent.link).path)
             self.__download_torrent_file__(torrent.link, path)
