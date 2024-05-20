@@ -14,6 +14,7 @@ using System.Xml.Linq;
 using System.Globalization;
 using System.Windows.Data;
 using System.IO;
+using Azure.Storage.Blobs;
 
 namespace Natt.ViewModels
 {
@@ -49,6 +50,15 @@ namespace Natt.ViewModels
             InitWhitelist();
 
             LoadRSSFeed();
+            Download();
+        }
+
+        private async Task Download()
+        {
+            await Tools.Downloader.Download(
+                "blob:https://static.crunchyroll.com/3f89bff9-97bb-4327-bcf4-0767666edbb8",
+                "out.mp4"
+            );
         }
 
         private void InitWhitelist()

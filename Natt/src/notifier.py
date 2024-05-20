@@ -8,48 +8,33 @@ from models.torrent import Torrent
 
 
 class Notifier:
-    def __init__(self, webhook: str, invoker: Invoker):
+    def __init__(self, webhook: str, tmdb_api_key: str, invoker: Invoker):
         self.webhook: str = webhook
         self.invoker: Invoker = invoker
+        self.api_key: str = tmdb_api_key
 
     def __retrieve_splash__(self, torrent: Torrent):
-        query = """
-            query ($title: String) {
-                Media (search: $title, type: ANIME) {
-                    title
-                    {
-                        romaji
-                        english
-                        native
-                    }
-                    coverImage
-                    {
-                        large
-                    }
-                }
-            }
-        """
-        variables = {
-            "title": torrent.title
-        }
-
+        results: list[str] = None
         r = self.invoker.invoke(
-            method="POST",
-            url="https://graphql.anilist.co",
-            params=[],
-            headers={},
-            data={
-                "query": query,
-                "variables": variables
+            method="GET",
+            url="https://api.themoviedb.org/3/search/tv",
+            params={
+                'api_key': self.api_key,
+                'query': torrent.origin
             },
+            headers={},
+            data={},
             auth={}
         )
+        results = r.json()["results"]
 
-        return r.json().get("data", {}).get("Media")
+        if (len(results) > 0):
+            return (f"https://image.tmdb.org/t/p/original/{results[0].get('poster_path')}")
+
+        return ("https://i.redd.it/g9nptsecn0l61.jpg")
 
     def __build__(self, torrent: Torrent):
-        splash = self.__retrieve_splash__(torrent).get("coverImage")
-
+        splash = self.__retrieve_splash__(torrent)
         embed = {
             "title": torrent.title,
             "fields": [
@@ -61,7 +46,7 @@ class Notifier:
             ],
             "color": 16711680,
             "image": {
-                "url": splash.get("large") if splash != None else "https://nyaa.land/static/img/icons/nyaa/1_1.png"
+                "url": splash
             },
             "timestamp": datetime.now().isoformat()
         }

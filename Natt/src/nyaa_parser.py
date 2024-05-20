@@ -24,7 +24,7 @@ class NyaaParser:
             category = item.getElementsByTagName('nyaa:category')[0].firstChild.nodeValue.strip()
             size = item.getElementsByTagName('nyaa:size')[0].firstChild.nodeValue.strip()
 
-            torrent: Torrent = self.__build_torrent__(title, link, guid, publication, seeders, leechers, downloads, hash, category, size)
+            torrent: Torrent = self.__build_torrent__(title, link, guid, publication, seeders, leechers, downloads, hash, category, size, None)
 
             torrents.append(torrent)
 
@@ -40,7 +40,8 @@ class NyaaParser:
         downloads: str,
         hash: str,
         category: str,
-        size: str
+        size: str,
+        origin: str
     ) -> Torrent:
 
         return (
@@ -54,6 +55,7 @@ class NyaaParser:
                 downloads,
                 hash,
                 category,
-                size
+                size,
+                origin
             )
         )

@@ -25,3 +25,10 @@ D:\Natt\Client\Natt\obj\Debug\net8.0-windows\Natt.genruntimeconfig.cache
 D:\Natt\Client\Natt\obj\Debug\net8.0-windows\ref\Natt.dll
 D:\Natt\Client\Natt\obj\Debug\net8.0-windows\Resources\Icons.baml
 D:\Natt\Client\Natt\obj\Debug\net8.0-windows\App.baml
+D:\Natt\Client\Natt\bin\Debug\net8.0-windows\Azure.Core.dll
+D:\Natt\Client\Natt\bin\Debug\net8.0-windows\Azure.Storage.Blobs.dll
+D:\Natt\Client\Natt\bin\Debug\net8.0-windows\Azure.Storage.Common.dll
+D:\Natt\Client\Natt\bin\Debug\net8.0-windows\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Natt\Client\Natt\bin\Debug\net8.0-windows\System.IO.Hashing.dll
+D:\Natt\Client\Natt\bin\Debug\net8.0-windows\System.Memory.Data.dll
+D:\Natt\Client\Natt\obj\Debug\net8.0-windows\Natt_Content.g.cs

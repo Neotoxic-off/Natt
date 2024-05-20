@@ -9,7 +9,8 @@ class Torrent:
         downloads: str,
         hash: str,
         category: str,
-        size: str
+        size: str,
+        origin: str
     ) -> None:
         
         self.title: str = title
@@ -22,3 +23,4 @@ class Torrent:
         self.hash: str = hash
         self.category: str = category
         self.size: str = size
+        self.origin: str = origin
